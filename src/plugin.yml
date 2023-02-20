@@ -1,0 +1,28 @@
+name: MydoriaRPG
+version: 0.1.2
+author: Redwoub
+website: https://github.com/Redwoub
+main: fr.redwoub.mydoriarpg.Main
+commands:
+  menu:
+  statistique:
+    aliases:
+      - stats
+      - stat
+  skill:
+    aliases:
+      - metier
+      - skills
+  colorchat:
+  colorname:
+  setrank:
+    permission: mydoria.setrank
+    permission-message: §cVous n'avez pas la permission !
+  friends:
+    aliases:
+      - friend
+      - f
+      - amis
+      - ami
+  test:
+    permission: mydoria.admin
