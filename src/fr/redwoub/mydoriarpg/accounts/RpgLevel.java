@@ -52,18 +52,12 @@ public enum RpgLevel {
     LVL47(68000, 47),
     LVL48(72000, 48),
     LVL49(76000, 49),
-    LVL50(80000, 50),//5000xp tt les 5
-    LVL275(10000, 275),
-    LVL276(10000, 276),
-    LVL277(10000, 277),
-    LVL278(10000, 278),
-    LVL279(10000, 279),
-    LVL280(10000, 280);
+    LVL50(80000, 50);//5000xp tt les 5, a refaire tout
 
 
     private int needingxp;
     private int lvl;
-    private static final int maxLevel = 280;
+    private static final int maxLevel = 1500;
     RpgLevel(int needingxp, int lvl){
         this.needingxp = needingxp;
         this.lvl = lvl;

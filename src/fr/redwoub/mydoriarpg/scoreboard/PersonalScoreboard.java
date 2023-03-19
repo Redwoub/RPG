@@ -53,7 +53,7 @@ public class PersonalScoreboard {
         objectiveSign.setLine(6, " §7• Niveau §f: " + rpglvl);
         objectiveSign.setLine(7, " §7• Mana §f: §b" + currentMana + "§f/§b" + maxMana);
         objectiveSign.setLine(8,"§3");
-        objectiveSign.setLine(9," §7• Players §f: §e" + Bukkit.getOnlinePlayers().size() + " / 100");
+        objectiveSign.setLine(9," §7• Players §f: §e" + Bukkit.getOnlinePlayers().size() + " / " + Bukkit.getMaxPlayers());
         objectiveSign.setLine(10," §7• §2Guild §f: §bA FAIRE");
         objectiveSign.setLine(11,"§4");
         objectiveSign.setLine(12, ip);

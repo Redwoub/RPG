@@ -52,12 +52,12 @@ public enum CombatLevel {
     LVL47(68000, 47),
     LVL48(72000, 48),
     LVL49(76000, 49),
-    LVL50(80000, 50); //5000xp tt les 5
+    LVL50(80000, 50); //5000xp tt les 5, a refaire tout
 
 
     private int needingxp;
     private int lvl;
-    private static final int maxLevel = 90;
+    private static final int maxLvl = 800;
 
     CombatLevel(int needingxp, int lvl){
         this.needingxp = needingxp;
@@ -78,6 +78,6 @@ public enum CombatLevel {
     }
 
     public static int getMaxLevel() {
-        return maxLevel;
+        return maxLvl;
     }
 }

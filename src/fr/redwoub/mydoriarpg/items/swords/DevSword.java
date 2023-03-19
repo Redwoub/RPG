@@ -26,8 +26,8 @@ public class DevSword {
                     "§7Dégat Critique: §c+" + data.getInt("degat_critique"), "§7Taux Critique: §c+" + data.getInt("taux_critique"),
                     "", ItemManager.colorByRarity(data.getString("rarete")) + " §l" + data.getString("rarete")));
         }
-        itemMeta.setUnbreakable(true);
 
+        itemMeta.setUnbreakable(true);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

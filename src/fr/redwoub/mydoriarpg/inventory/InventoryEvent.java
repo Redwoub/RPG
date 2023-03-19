@@ -2,6 +2,7 @@ package fr.redwoub.mydoriarpg.inventory;
 
 import fr.redwoub.mydoriarpg.Main;
 import fr.redwoub.mydoriarpg.accounts.PlayerType;
+import fr.redwoub.mydoriarpg.accounts.RpgLevel;
 import fr.redwoub.mydoriarpg.managers.CombatLevelManager;
 import fr.redwoub.mydoriarpg.utils.FileUtils;
 import fr.redwoub.mydoriarpg.managers.FriendsManager;
@@ -199,7 +200,7 @@ public class InventoryEvent implements Listener {
                             if(accounts.getDataStatistique().getPlayerType() == PlayerType.DEMONIAQUE){
                                 accounts.getDataStatistique().setColorChat("noir");
                             } else {
-                                player.sendMessage("§cCette couleur est inaccessible pour vous.");
+                                player.sendMessage("§cVous n'avez pas les prérequis pour choisir cette couleur");
                                 return;
                             }
                         } else if(current.getDurability() == 1) {
@@ -228,7 +229,7 @@ public class InventoryEvent implements Listener {
                             if(accounts.getDataLvl().getRpgLvl() == 280){
                                 accounts.getDataStatistique().setColorChat("dore");
                             } else {
-                             player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6280");
+                             player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6" + (RpgLevel.getMaxLevel() - 100));
                              return;
                             }
                         } else if(current.getDurability() == 15){
@@ -269,7 +270,7 @@ public class InventoryEvent implements Listener {
                             if(accounts.getDataStatistique().getPlayerType() == PlayerType.DEMONIAQUE){
                                 accounts.getDataStatistique().setColorName("noir");
                             } else {
-                                player.sendMessage("§cCette couleur est inaccessible pour vous.");
+                                player.sendMessage("§cVous n'avez pas les prérequis pour choisir cette couleur");
                                 return;
                             }
                         } else if(current.getDurability() == 1) {
@@ -298,7 +299,7 @@ public class InventoryEvent implements Listener {
                             if(accounts.getDataLvl().getRpgLvl() == 280){
                                 accounts.getDataStatistique().setColorName("dore");
                             } else {
-                                player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6280");
+                                player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6" + (RpgLevel.getMaxLevel() - 100));
                                 return;
                             }
                         } else if(current.getDurability() == 15){

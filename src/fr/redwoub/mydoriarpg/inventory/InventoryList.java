@@ -96,7 +96,7 @@ public class InventoryList {
             inventory.setItem(21, glass);
             inventory.setItem(23, glass);
             inventory.setItem(24, glass);
-            inventory.setItem(0, new ItemBuilder(Material.PAINTING).setName("§7Player Type : " + accounts.getDataStatistique().getPlayerType().getPrefix()).setLore("§7Le player type est votre type d'items/capacité", "§7qui vous infligeron le plus de dégats.", "§7Les dégats de ce type seront multipliés.").toItemStack());
+            inventory.setItem(0, new ItemBuilder(Material.PAINTING).setName("§7Player Type : " + accounts.getDataStatistique().getPlayerType().getPrefix()).setLore("§7Le player type est votre type d'items/capacité", "§7qui vous infligeron le plus de dégats.", "§7Mais vos attaques de ce type seront plus puissante.").toItemStack());
             inventory.setItem(1, new ItemBuilder(Material.APPLE).setName("§cVie §7: §f" + accounts.getDataStatistique().getMaxVie()).toItemStack());
             inventory.setItem(7, new ItemBuilder(Material.BLAZE_POWDER).setName("§cForce §7: §f" + accounts.getDataStatistique().getForce()).toItemStack());
             inventory.setItem(19, new ItemBuilder(Material.ENCHANTED_BOOK).setName("§bMana §7: §f" + accounts.getDataStatistique().getMaxMana()).toItemStack());
