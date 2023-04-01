@@ -19,4 +19,20 @@ public class FileUtils {
     public static File getItemFile(String fileName){
         return new File(Main.getInstance().getDataFolder() + "/items/template", fileName + ".yml");
     }
+
+    public static void deleteDirectory(File file) {
+        // store all the paths of files and folders present
+        // inside directory
+        for (File subfile : file.listFiles()){
+
+            // if it is a subfolder,e.g Rohan and Ritik,
+            //  recursively call function to empty subfolder
+            if (subfile.isDirectory()){
+                deleteDirectory(subfile);
+            }
+
+            // delete files and empty subfolders
+            subfile.delete();
+        }
+    }
 }

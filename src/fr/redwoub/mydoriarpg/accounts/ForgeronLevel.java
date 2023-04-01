@@ -57,7 +57,7 @@ public enum ForgeronLevel {
 
     private int needingxp;
     private int lvl;
-    private static final int maxLvl = 300;
+    private static final int maxLvl = 500;
 
     ForgeronLevel(int needingxp, int lvl){
         this.needingxp = needingxp;

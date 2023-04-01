@@ -30,6 +30,7 @@ public class StatistiqueManager extends BukkitRunnable {
         degatCrit = accounts.getDataStatistique().getDegatCritique();
         attackSpeed = accounts.getDataStatistique().getAttaqueSpeed();
         tauxCrit = accounts.getDataStatistique().getTauxCritique();
+
     }
 
     @Override

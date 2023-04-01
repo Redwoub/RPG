@@ -22,6 +22,8 @@ public class PersonalScoreboard {
     private String rpglvl;
     private int currentMana;
     private int maxMana;
+    private int currentHealth;
+    private int maxHealth;
 
     PersonalScoreboard(Player player){
         this.player = player;
@@ -39,6 +41,8 @@ public class PersonalScoreboard {
             rank = a.getDataRank().getRank();
             currentMana = a.getDataStatistique().getCurrentMana();
             maxMana = a.getDataStatistique().getMaxMana();
+            currentHealth = a.getDataStatistique().getVie();
+            maxHealth = a.getDataStatistique().getMaxVie();
         });
     }
 
@@ -52,11 +56,12 @@ public class PersonalScoreboard {
         objectiveSign.setLine(5, " §7• Cols §f: §e" + Cols);
         objectiveSign.setLine(6, " §7• Niveau §f: " + rpglvl);
         objectiveSign.setLine(7, " §7• Mana §f: §b" + currentMana + "§f/§b" + maxMana);
-        objectiveSign.setLine(8,"§3");
-        objectiveSign.setLine(9," §7• Players §f: §e" + Bukkit.getOnlinePlayers().size() + " / " + Bukkit.getMaxPlayers());
-        objectiveSign.setLine(10," §7• §2Guild §f: §bA FAIRE");
-        objectiveSign.setLine(11,"§4");
-        objectiveSign.setLine(12, ip);
+        objectiveSign.setLine(8, " §7• Vie §f: §c" + currentHealth + "§f/§c" + maxHealth);
+        objectiveSign.setLine(9,"§3");
+        objectiveSign.setLine(10," §7• Players §f: §e" + Bukkit.getOnlinePlayers().size() + " / " + Bukkit.getMaxPlayers());
+        objectiveSign.setLine(11," §7• §2Guild §f: §bA FAIRE");
+        objectiveSign.setLine(12,"§4");
+        objectiveSign.setLine(13, ip);
 
         objectiveSign.updateLines();
     }

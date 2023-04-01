@@ -39,6 +39,8 @@ public class Accounts extends AbstractData {
         dataOptionFriends = YamlConfiguration.loadConfiguration(optionFriends);
         newPlayer = false;
 
+        if(!saveDir.exists())
+            saveDir.mkdir();
     }
 
     private String[] getDataFromYML(){
@@ -71,6 +73,7 @@ public class Accounts extends AbstractData {
 
     private void saveDataToYML(){
         StatistiqueManager statistiqueManager = Main.getInstance().statsBonusForEachPlayer.get(Bukkit.getPlayer(uuid));
+        /*
         dataAccount.set("vie_max", statistiqueManager.getVie());
         dataAccount.set("speed", statistiqueManager.getSpeed());
         dataAccount.set("defense", statistiqueManager.getDefense());
@@ -78,6 +81,7 @@ public class Accounts extends AbstractData {
         dataAccount.set("degat_critique", statistiqueManager.degatCrit);
         dataAccount.set("mana_max", statistiqueManager.getMana());
         dataAccount.set("attaque_speed", statistiqueManager.getAttackSpeed());
+         */
         dataAccount.set("combat_lvl", dataLvl.getCombatLvl());
         dataAccount.set("combat_missing_xp", dataLvl.getMissingCombatXp());
         dataAccount.set("donjon_lvl", dataLvl.getDonjonLvl());
@@ -86,7 +90,7 @@ public class Accounts extends AbstractData {
         dataAccount.set("forgeron_missing_xp", dataLvl.getMissingForgeronXp());
         dataAccount.set("color_name", dataStatistique.getColorName());
         dataAccount.set("col", dataCols.getCols());
-        dataAccount.set("taux_critique", statistiqueManager.getTauxCrit());
+        //dataAccount.set("taux_critique", Math.max(statistiqueManager.getTauxCrit(), 0));
         dataAccount.set("rpg_lvl", dataLvl.getRpgLvl());
         dataAccount.set("rpg_missing_xp", dataLvl.getMissingRpgXp());
         dataAccount.set("color_chat", dataStatistique.getColorChat());
@@ -94,11 +98,11 @@ public class Accounts extends AbstractData {
         dataAccount.set("player_type", dataStatistique.getPlayerType().getName());
 
         try {
+            if(!friends.exists())
+                friends.createNewFile();
             dataAccount.save(account);
             dataOptionFriends.save(optionFriends);
-            if(!friends.exists()){
-                friends.createNewFile();
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -197,5 +201,9 @@ public class Accounts extends AbstractData {
 
     public File getFriends() {
         return friends;
+    }
+
+    public boolean isNewPlayer() {
+        return newPlayer;
     }
 }

@@ -57,7 +57,7 @@ public enum CombatLevel {
 
     private int needingxp;
     private int lvl;
-    private static final int maxLvl = 800;
+    private static final int maxLvl = 1000;
 
     CombatLevel(int needingxp, int lvl){
         this.needingxp = needingxp;
