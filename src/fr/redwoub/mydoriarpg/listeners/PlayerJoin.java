@@ -19,16 +19,27 @@ public class PlayerJoin implements Listener {
         Accounts accounts = new Accounts(player.getUniqueId());
         FriendsManager friendsManager = new FriendsManager(accounts);
         accounts.onLogin();
-        StatistiqueManager statistiqueManager = new StatistiqueManager(player);
-        Main.getInstance().statsBonusForEachPlayer.put(player, statistiqueManager);
-        statistiqueManager.runTaskTimer(Main.getInstance(), 20L, 40L);
         friendsManager.sendJoinNotification();
         player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
-        player.setMaxHealth(accounts.getDataStatistique().getMaxVie());
-        player.setHealth(accounts.getDataStatistique().getVie());
         player.setWalkSpeed(PlayerUtils.generateSpeed(accounts));
         Main.getInstance().getScoreboardManager().onLogin(player);
         event.setJoinMessage("§8[§a+§8] " + player.getDisplayName());
+
+        if(accounts.isNewPlayer()){
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"))
+                    + "§cVous allez êtres déconnecté dans 3 secondes pour finir les paramétrages de votre compte.");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            player.kickPlayer("§cLes réglages de votre compte sont terminé.\n§aVous pouvez vous reconnecter");
+
+        } else {
+            StatistiqueManager statistiqueManager = new StatistiqueManager(player);
+            Main.getInstance().statsBonusForEachPlayer.put(player, statistiqueManager);
+            statistiqueManager.runTaskTimer(Main.getInstance(), 20L, 40L);
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class StatistiqueManager extends BukkitRunnable {
     private final Player player;
     public int mana;
-    public int vie;
+    public int maxVie;
     public int speed;
     public int defense;
     public int force;
@@ -21,16 +21,20 @@ public class StatistiqueManager extends BukkitRunnable {
 
     public StatistiqueManager(Player player){
         this.player = player;
-        accounts = Main.getInstance().getAccount(player).get();
-        mana = accounts.getDataStatistique().getMaxMana();
-        vie = accounts.getDataStatistique().getMaxVie();
-        speed = accounts.getDataStatistique().getSpeed();
-        defense = accounts.getDataStatistique().getDefense();
-        force = accounts.getDataStatistique().getForce();
-        degatCrit = accounts.getDataStatistique().getDegatCritique();
-        attackSpeed = accounts.getDataStatistique().getAttaqueSpeed();
-        tauxCrit = accounts.getDataStatistique().getTauxCritique();
+        if(Main.getInstance().getAccount(player).isPresent()){
+            accounts = Main.getInstance().getAccount(player).get();
+            mana = accounts.getDataStatistique().getMaxMana();
+            maxVie = accounts.getDataStatistique().getMaxVie();
+            speed = accounts.getDataStatistique().getSpeed();
+            defense = accounts.getDataStatistique().getDefense();
+            force = accounts.getDataStatistique().getForce();
+            degatCrit = accounts.getDataStatistique().getDegatCritique();
+            attackSpeed = accounts.getDataStatistique().getAttaqueSpeed();
+            tauxCrit = accounts.getDataStatistique().getTauxCritique();
 
+        } else {
+            accounts = null;
+        }
     }
 
     @Override
@@ -111,7 +115,7 @@ public class StatistiqueManager extends BukkitRunnable {
         }
 
         accounts.getDataStatistique().setMaxMana(mana + manaBonus);
-        accounts.getDataStatistique().setVie(vie + vieBonus);
+        accounts.getDataStatistique().setVie(maxVie + vieBonus);
         accounts.getDataStatistique().setSpeed(speed + speedBonus);
         accounts.getDataStatistique().setDefense(defense + defenseBonus);
         accounts.getDataStatistique().setForce(force + forceBonus);
@@ -125,8 +129,8 @@ public class StatistiqueManager extends BukkitRunnable {
         return mana;
     }
 
-    public int getVie() {
-        return vie;
+    public int getMaxVie() {
+        return maxVie;
     }
 
     public int getSpeed() {

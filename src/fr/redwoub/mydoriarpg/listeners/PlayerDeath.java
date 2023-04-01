@@ -19,14 +19,17 @@ public class PlayerDeath implements Listener {
         Player player = event.getEntity().getPlayer();
         Main.getInstance().getAccount(player).ifPresent(Accounts::onLogout);
         player.kickPlayer("§cVous etes mort ! Votre compte a été réinitialisé.");
+        File playerData = new File(Main.getInstance().getConfig().getString("config.player-data-path"), player.getUniqueId() + ".dat");
         File file = new File(Main.getInstance().getDataFolder(), "/accounts/" + player.getUniqueId() + "/");
         File account = new File(file, "Account.yml");
         File friends = new File(file, "Friends.yml");
         File optionFriends = new File(file, "OptionFriends.yml");
         File deletedFile = new File(Main.getInstance().getSaveDeleteAccount(), file.getName());
+        File deletedPlayerDaya = new File(deletedFile, playerData.getName());
         File deletedAccount = new File(deletedFile, account.getName());
         File deletedFriend = new File(deletedFile, friends.getName());
         File deletedOptionFriend = new File(deletedFile, optionFriends.getName());
+
 
         if(deletedFile.exists()){
             FileUtils.deleteDirectory(deletedFile);
@@ -36,10 +39,12 @@ public class PlayerDeath implements Listener {
                 Files.copy(account.toPath(), deletedAccount.toPath());
                 Files.copy(friends.toPath(), deletedFriend.toPath());
                 Files.copy(optionFriends.toPath(), deletedOptionFriend.toPath());
+                Files.copy(playerData.toPath(), deletedPlayerDaya.toPath());
                 account.delete();
                 friends.delete();
                 optionFriends.delete();
                 file.delete();
+                playerData.delete();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -49,10 +54,12 @@ public class PlayerDeath implements Listener {
                 Files.copy(account.toPath(), deletedAccount.toPath());
                 Files.copy(friends.toPath(), deletedFriend.toPath());
                 Files.copy(optionFriends.toPath(), deletedOptionFriend.toPath());
+                Files.copy(playerData.toPath(), deletedPlayerDaya.toPath());
                 account.delete();
                 friends.delete();
                 optionFriends.delete();
                 file.delete();
+                playerData.delete();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

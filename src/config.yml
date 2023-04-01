@@ -2,6 +2,7 @@ messages:
   friends-prefix: "&8[&bFriends&8]&7 "
   guilde-prefix: "&8[&2Guilde&8]&7 "
   party-prefix: "&8[&9Party&8]&7 "
+  system-prefix: "&8[&cSysteme&8]&7 "
 friends:
   max-friends: 25
 heads:
@@ -11,4 +12,5 @@ heads:
   wither-boss: "3e4f49535a276aacc4dc84133bfe81be5f2a4799a4c04d9a4ddb72d819ec2b2b"
   earth: "c69196b330c6b8962f23ad5627fb6ecce472eaf5c9d44f791f6709c7d0f4dece"
 config:
+  player-data-path: "D:/Minecraft/Serveur Local/Mydoria/RPG 1.12.2/world/playerdata/"
   pvp: true

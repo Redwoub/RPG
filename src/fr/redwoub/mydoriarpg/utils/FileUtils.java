@@ -17,7 +17,7 @@ public class FileUtils {
     }
 
     public static File getItemFile(String fileName){
-        return new File(Main.getInstance().getDataFolder() + "/items/template", fileName + ".yml");
+        return new File(Main.getInstance().getDataFolder() + "/items/templates", fileName + ".yml");
     }
 
     public static void deleteDirectory(File file) {

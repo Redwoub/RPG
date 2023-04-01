@@ -15,14 +15,20 @@ public class PlayerQuit implements Listener {
         Player player = event.getPlayer();
         Main.getInstance().getAccount(player).ifPresent(accounts -> {
             FriendsManager friendsManager = new FriendsManager(accounts);
-            StatistiqueManager statistiqueManager = Main.getInstance().statsBonusForEachPlayer.get(player);
             friendsManager.sendLeftNotification();
-            statistiqueManager.cancel();
-            accounts.onLogout();
-            event.setQuitMessage("§8[§c-§8] " + player.getDisplayName());
-            Main.getInstance().statsBonusForEachPlayer.remove(player);
-        });
-        Main.getInstance().getScoreboardManager().onLogout(player);
+            Main.getInstance().getScoreboardManager().onLogout(player);
+            if(accounts.isNewPlayer()){
+                accounts.onLogout();
+            } else {
+                accounts.onLogout();
+                StatistiqueManager statistiqueManager = Main.getInstance().statsBonusForEachPlayer.get(player);
+                statistiqueManager.cancel();
+                Main.getInstance().statsBonusForEachPlayer.remove(player);
+            }
 
+
+        });
+
+        event.setQuitMessage("§8[§c-§8] " + player.getDisplayName());
     }
 }
