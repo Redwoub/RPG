@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
     private static Main instance;
     private List<Accounts> accounts;
     private Map<Player, Player> friendsRequest;
+    private Map<String, String> pseudoLinkedUUID;
     private File saveDeleteAccount;
     private File pseudoWithUUID;
     private ScoreboardManager scoreboardManager;
@@ -59,7 +60,9 @@ public class Main extends JavaPlugin {
         saveDeleteAccount = new File(getDataFolder(), "/delete_accounts/");
         pseudoWithUUID = new File(getDataFolder(), "PseudoLinkToUUID.yml");
         accounts = new ArrayList<>();
-        friendsRequest = new HashMap<>();
+        friendsRequest = new WeakHashMap<>();
+        pseudoLinkedUUID = new HashMap<>();
+
         scheduledExecutorService = Executors.newScheduledThreadPool(16);
         executorMonoThread = Executors.newScheduledThreadPool(1);
         scoreboardManager = new ScoreboardManager();
@@ -112,6 +115,9 @@ public class Main extends JavaPlugin {
 
     public Map<Player, Player> getFriendsRequest() {
         return friendsRequest;
+    }
+    public Map<String, String> getPseudoLinkedUUID() {
+        return pseudoLinkedUUID;
     }
 
     public File getSaveDeleteAccount() {

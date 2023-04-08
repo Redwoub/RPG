@@ -14,6 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 public class PlayerJoin implements Listener {
 
@@ -22,25 +24,20 @@ public class PlayerJoin implements Listener {
         Player player = event.getPlayer();
         Accounts accounts = new Accounts(player.getUniqueId());
         FriendsManager friendsManager = new FriendsManager(accounts);
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(Main.getInstance().getPseudoWithUUID());
+        Main main = Main.getInstance();
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(main.getPseudoWithUUID());
         accounts.onLogin();
         friendsManager.sendJoinNotification();
         player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
         player.setWalkSpeed(PlayerUtils.generateSpeed(accounts));
-        Main.getInstance().getScoreboardManager().onLogin(player);
+        main.getScoreboardManager().onLogin(player);
 
-        if(config.get(player.getName()) != null){
-            try {
-                FileUtils.removeLine(Main.getInstance().getPseudoWithUUID(), player.getName().toLowerCase());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            config.set(player.getName().toLowerCase(), player.getUniqueId().toString());
-        } else {
-            config.set(player.getName().toLowerCase(), player.getUniqueId().toString());
-        }
+        if(!main.getPseudoLinkedUUID().isEmpty())
+            main.getPseudoLinkedUUID().clear();
 
-        FileUtils.save(config, Main.getInstance().getPseudoWithUUID());
+        config.set(player.getUniqueId().toString(), player.getName().toLowerCase());
+        FileUtils.fillMapWithAllLineOfFile(main.getPseudoWithUUID(), main.getPseudoLinkedUUID());
+        FileUtils.save(config, main.getPseudoWithUUID());
 
         event.setJoinMessage("§8[§a+§8] " + player.getDisplayName());
     }
