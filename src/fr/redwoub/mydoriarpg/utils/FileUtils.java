@@ -46,6 +46,7 @@ public class FileUtils {
         }
     }
 
+    /*
     public static void removeLine(String lineToRemove, File file) throws IOException{
         //Reading File Content and storing it to a StringBuilder variable ( skips lineToRemove)
         StringBuilder sb = new StringBuilder();
@@ -66,5 +67,26 @@ public class FileUtils {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
         writer.append(sb.toString());
         writer.close();
+    }
+
+     */
+
+    public static void removeLine(File file, String lineToRemove) throws IOException {
+        File tempFile = new File(file.getParentFile(), "myTempFile.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+            // trim newline when comparing with lineToRemove
+            String trimmedLine = currentLine.trim();
+            if(trimmedLine.equals(lineToRemove)) continue;
+            writer.write(currentLine + System.getProperty("line.separator"));
+        }
+        writer.close();
+        reader.close();
+        boolean successful = tempFile.renameTo(file);
     }
 }
