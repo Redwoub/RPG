@@ -19,7 +19,7 @@ public class PlayerDeath implements Listener {
         Player player = event.getEntity().getPlayer();
         Main.getInstance().getAccount(player).ifPresent(Accounts::onLogout);
         player.kickPlayer("§cVous etes mort ! Votre compte a été réinitialisé.");
-        File playerData = new File(Main.getInstance().getConfig().getString("config.player-data-path"), player.getUniqueId() + ".dat");
+        File playerData = new File(Main.getInstance().getConfig().getString("config.player-data-world-path"), player.getUniqueId() + ".dat");
         File file = new File(Main.getInstance().getDataFolder(), "/accounts/" + player.getUniqueId() + "/");
         File account = new File(file, "Account.yml");
         File friends = new File(file, "Friends.yml");
