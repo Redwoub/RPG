@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
         getCommand("skill").setExecutor(new Skill());
         getCommand("friends").setExecutor(new Friends());
         getCommand("test").setExecutor(new Test());
+        getCommand("levelup").setExecutor(new LevelUP());
     }
 
     @Override
