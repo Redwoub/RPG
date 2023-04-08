@@ -37,9 +37,8 @@ public class SetRank implements CommandExecutor {
                 sender.sendMessage("§aLe grade de " + player.getDisplayName() + " §aa bien été modifié !");
             });
         } else {
-            YamlConfiguration config = YamlConfiguration.loadConfiguration(Main.getInstance().getPseudoWithUUID());
-            if(config.getString(args[0].toLowerCase()) != null){
-                UUID uuid = UUID.fromString(config.getString(args[0].toLowerCase()));
+            if(Main.getInstance().getPseudoLinkedUUID().get(args[0].toLowerCase()) != null){
+                UUID uuid = UUID.fromString(Main.getInstance().getPseudoLinkedUUID().get(args[0].toLowerCase()));
                 File account = new File(Main.getInstance().getDataFolder(), "accounts/" + uuid + "/Account.yml");
                 YamlConfiguration cAccount = YamlConfiguration.loadConfiguration(account);
                 cAccount.set("grade", RankUnit.getByName(args[1]).getName());
@@ -49,20 +48,6 @@ public class SetRank implements CommandExecutor {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix")) + "§cCe joueur n'existe pas !");
             }
         }
-        /*
-        if(Bukkit.getPlayer(args[0]) == null){
-            sender.sendMessage("§c§cErreur §8: §7Ce joueur n'existe pas");
-            return false;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
-        Main.getInstance().getAccount(player).ifPresent(accounts -> {
-            RankUnit rank = RankUnit.getByName(args[1]);
-            accounts.getDataRank().setRank(rank);
-            sender.sendMessage("§aLe grade de " + player.getDisplayName() + " §aa bien été modifié !");
-        });
-
-         */
         return false;
     }
 }
