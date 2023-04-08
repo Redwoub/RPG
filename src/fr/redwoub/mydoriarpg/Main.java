@@ -9,6 +9,7 @@ import fr.redwoub.mydoriarpg.listeners.PlayerJoin;
 import fr.redwoub.mydoriarpg.listeners.PlayerQuit;
 import fr.redwoub.mydoriarpg.managers.StatistiqueManager;
 import fr.redwoub.mydoriarpg.scoreboard.ScoreboardManager;
+import fr.redwoub.mydoriarpg.utils.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,7 @@ public class Main extends JavaPlugin {
     private List<Accounts> accounts;
     private Map<Player, Player> friendsRequest;
     private File saveDeleteAccount;
+    private File pseudoWithUUID;
     private ScoreboardManager scoreboardManager;
     private ScheduledExecutorService executorMonoThread;
     private ScheduledExecutorService scheduledExecutorService;
@@ -55,6 +57,7 @@ public class Main extends JavaPlugin {
         instance = this;
         register();
         saveDeleteAccount = new File(getDataFolder(), "/delete_accounts/");
+        pseudoWithUUID = new File(getDataFolder(), "PseudoLinkToUUID.yml");
         accounts = new ArrayList<>();
         friendsRequest = new HashMap<>();
         scheduledExecutorService = Executors.newScheduledThreadPool(16);
@@ -65,6 +68,8 @@ public class Main extends JavaPlugin {
 
         if(!saveDeleteAccount.exists())
             saveDeleteAccount.mkdir();
+
+        FileUtils.createFile(pseudoWithUUID);
 
         statistiqueManager = new StatistiqueManager().runTaskTimer(this, 20L, 60L);
     }
@@ -111,5 +116,9 @@ public class Main extends JavaPlugin {
 
     public File getSaveDeleteAccount() {
         return saveDeleteAccount;
+    }
+
+    public File getPseudoWithUUID() {
+        return pseudoWithUUID;
     }
 }
