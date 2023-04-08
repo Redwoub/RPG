@@ -106,40 +106,7 @@ public class Accounts extends AbstractData {
             e.printStackTrace();
         }
     }
-
-    private void saveDataToYMLForNewPlayer(){
-        dataAccount.set("vie_max", dataStatistique.getMaxHealth());
-        dataAccount.set("speed", dataStatistique.getSpeed());
-        dataAccount.set("defense", dataStatistique.getDefense());
-        dataAccount.set("force", dataStatistique.getForce());
-        dataAccount.set("degat_critique", dataStatistique.getDegatCritique());
-        dataAccount.set("mana_max", dataStatistique.getMaxMana());
-        dataAccount.set("attaque_speed", dataStatistique.getAttaqueSpeed());
-        dataAccount.set("combat_lvl", dataLvl.getCombatLvl());
-        dataAccount.set("combat_missing_xp", dataLvl.getMissingCombatXp());
-        dataAccount.set("donjon_lvl", dataLvl.getDonjonLvl());
-        dataAccount.set("donjon_missing_xp", dataLvl.getMissingDonjonXp());
-        dataAccount.set("forgeron_lvl", dataLvl.getForgeronLvl());
-        dataAccount.set("forgeron_missing_xp", dataLvl.getMissingForgeronXp());
-        dataAccount.set("color_name", dataStatistique.getColorName());
-        dataAccount.set("col", dataCols.getCols());
-        dataAccount.set("taux_critique", dataStatistique.getTauxCritique());
-        dataAccount.set("rpg_lvl", dataLvl.getRpgLvl());
-        dataAccount.set("rpg_missing_xp", dataLvl.getMissingRpgXp());
-        dataAccount.set("color_chat", dataStatistique.getColorChat());
-        dataAccount.set("grade", dataRank.getRank().getName());
-        dataAccount.set("player_type", dataStatistique.getPlayerType().getName());
-
-        try {
-            if(!friends.exists())
-                friends.createNewFile();
-            dataAccount.save(account);
-            dataOptionFriends.save(optionFriends);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
     public void onLogin(){
         Main.getInstance().getAccounts().add(this);
         String[] data = getDataFromYML();
@@ -171,7 +138,7 @@ public class Accounts extends AbstractData {
             dataStatistique.setCurrentMana(dataStatistique.getMaxMana());
             dataStatistique.setHealth(dataStatistique.getMaxHealth());
             dataStatistique.setPlayerType(PlayerType.generateType(uuid));
-            saveDataToYMLForNewPlayer();
+            saveDataToYML();
 
         } else {
             dataStatistique.setMaxHealth(Integer.parseInt(data[0]));
