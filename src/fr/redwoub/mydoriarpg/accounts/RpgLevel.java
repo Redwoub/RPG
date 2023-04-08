@@ -52,7 +52,8 @@ public enum RpgLevel {
     LVL47(68000, 47),
     LVL48(72000, 48),
     LVL49(76000, 49),
-    LVL50(80000, 50);//5000xp tt les 5, a refaire tout
+    LVL50(80000, 50),//5000xp tt les 5, a refaire tout
+    LVL1499(100, 1499);
 
 
     private int needingxp;

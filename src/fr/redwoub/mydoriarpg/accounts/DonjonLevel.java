@@ -57,7 +57,7 @@ public enum DonjonLevel {
 
     private int needingxp;
     private int lvl;
-    private static final int maxLvl = 600;
+    private static final int maxLvl = 500;
 
     DonjonLevel(int needingxp, int lvl){
         this.needingxp = needingxp;
