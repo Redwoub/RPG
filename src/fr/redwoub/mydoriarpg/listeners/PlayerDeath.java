@@ -24,7 +24,7 @@ public class PlayerDeath implements Listener {
         File account = new File(file, "Account.yml");
         File friends = new File(file, "Friends.yml");
         File optionFriends = new File(file, "OptionFriends.yml");
-        File deletedFile = new File(Main.getInstance().getSaveDeleteAccount(), file.getName());
+        File deletedFile = new File(Main.getInstance().getDeletedAccounts(), file.getName());
         File deletedPlayerDaya = new File(deletedFile, playerData.getName());
         File deletedAccount = new File(deletedFile, account.getName());
         File deletedFriend = new File(deletedFile, friends.getName());

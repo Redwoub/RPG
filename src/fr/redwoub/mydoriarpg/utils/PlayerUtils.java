@@ -1,14 +1,17 @@
 package fr.redwoub.mydoriarpg.utils;
 
+import fr.redwoub.mydoriarpg.Main;
 import fr.redwoub.mydoriarpg.accounts.Accounts;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Field;
+import java.util.UUID;
 
 public class PlayerUtils {
 
@@ -291,6 +294,15 @@ public class PlayerUtils {
         }
 
         return ChatColor.WHITE;
+    }
+
+    public static boolean hasDeletedAccount(UUID uuid){
+        File file = new File(Main.getInstance().getDeletedAccounts(), uuid + "/");
+        return file.exists();
+    }
+
+    public static File getDeletedAccount(UUID uuid){
+        return new File(Main.getInstance().getDeletedAccounts(), uuid + "/");
     }
 
     public static boolean hasItemInHand(Player player){

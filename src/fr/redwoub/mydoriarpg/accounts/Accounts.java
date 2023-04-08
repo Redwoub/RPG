@@ -170,7 +170,7 @@ public class Accounts extends AbstractData {
             dataOptionFriends.set("reciveJoinNotification", "ON");
             dataStatistique.setCurrentMana(dataStatistique.getMaxMana());
             dataStatistique.setHealth(dataStatistique.getMaxHealth());
-            dataStatistique.setPlayerType(PlayerType.generateType());
+            dataStatistique.setPlayerType(PlayerType.generateType(uuid));
             saveDataToYMLForNewPlayer();
 
         } else {

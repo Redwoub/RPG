@@ -30,7 +30,6 @@ public class PlayerJoin implements Listener {
         friendsManager.sendJoinNotification();
         player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
         player.setWalkSpeed(PlayerUtils.generateSpeed(accounts));
-        main.getScoreboardManager().onLogin(player);
 
         if(!main.getPseudoLinkedUUID().isEmpty())
             main.getPseudoLinkedUUID().clear();
@@ -39,6 +38,16 @@ public class PlayerJoin implements Listener {
         FileUtils.fillMapWithAllLineOfFile(main.getPseudoWithUUID(), main.getPseudoLinkedUUID());
         FileUtils.save(config, main.getPseudoWithUUID());
 
+        main.getScoreboardManager().onLogin(player);
         event.setJoinMessage("§8[§a+§8] " + player.getDisplayName());
+
+        if(accounts.isNewPlayer()){
+            try {
+                Thread.sleep(500);
+                player.kickPlayer("§cNous avons fini la configuration de votre compte\n§aVous pouvez vous reconnecter");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

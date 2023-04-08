@@ -1,6 +1,12 @@
 package fr.redwoub.mydoriarpg.accounts;
 
+import fr.redwoub.mydoriarpg.utils.PlayerUtils;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
+import java.io.File;
 import java.util.Arrays;
+import java.util.UUID;
 
 public enum PlayerType {
 
@@ -39,17 +45,24 @@ public enum PlayerType {
         return FEU;
     }
 
-    public static PlayerType generateType(){
-        int type = (int) ((Math.random() * (10-1)) + 1);
-        if(generateFakeType() == FOUDRE){
-            if(type < 8)//1,2,3,4,5,6,7
-                return FOUDRE;
-            else if(type >= 8 && type < 10)//8,9
-                return SPECIAL;
-            else if(type == 10)//10
-                return INCONNU;
+    public static PlayerType generateType(UUID uuid){
+        if(PlayerUtils.hasDeletedAccount(uuid)){
+            File account = PlayerUtils.getDeletedAccount(uuid);
+            File file = new File(account, "Account.yml");
+            YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+            return PlayerType.getByName(config.getString("player_type"));
+        } else {
+            int type = (int) ((Math.random() * (10-1)) + 1);
+            if(generateFakeType() == FOUDRE){
+                if(type < 8)//1,2,3,4,5,6,7
+                    return FOUDRE;
+                else if(type >= 8 && type < 10)//8,9
+                    return SPECIAL;
+                else if(type == 10)//10
+                    return INCONNU;
+            }
+            return generateFakeType();
         }
-        return generateFakeType();
     }
 
     public static PlayerType getByName(String name) {
