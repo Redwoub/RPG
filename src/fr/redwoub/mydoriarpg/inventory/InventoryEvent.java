@@ -156,7 +156,7 @@ public class InventoryEvent implements Listener {
                         } else if(current.getDurability() == 13){
                             accounts.getDataStatistique().setColorChat("violet");
                         } else if(current.getDurability() == 14){
-                            if(accounts.getDataLvl().getRpgLvl() == 750){
+                            if(accounts.getDataLvl().getRpgLvl() >= 750){
                                 accounts.getDataStatistique().setColorChat("dore");
                             } else {
                              player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6" + 750);
@@ -199,60 +199,46 @@ public class InventoryEvent implements Listener {
                         if(current.getDurability() == 0){
                             if(accounts.getDataStatistique().getPlayerType() == PlayerType.DEMONIAQUE){
                                 accounts.getDataStatistique().setColorName("noir");
-                                player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                             } else {
                                 player.sendMessage("§cVous n'avez pas les prérequis pour choisir cette couleur");
                                 return;
                             }
                         } else if(current.getDurability() == 1) {
                             accounts.getDataStatistique().setColorName("rouge");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 2) {
                             accounts.getDataStatistique().setColorName("Dark_Green");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 4) {
                             accounts.getDataStatistique().setColorName("bleu");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 6){
                             accounts.getDataStatistique().setColorName("cyan");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 7){
                             accounts.getDataStatistique().setColorName("gris");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 8){
                             accounts.getDataStatistique().setColorName("dark_gris");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 9){
                             accounts.getDataStatistique().setColorName("rose");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 10){
                             accounts.getDataStatistique().setColorName("vert");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 11){
                             accounts.getDataStatistique().setColorName("jaune");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 12){
                             accounts.getDataStatistique().setColorName("bleu_claire");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 13){
                             accounts.getDataStatistique().setColorName("violet");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else if(current.getDurability() == 14){
-                            if(accounts.getDataLvl().getRpgLvl() == 750){
+                            if(accounts.getDataLvl().getRpgLvl() >= 750){
                                 accounts.getDataStatistique().setColorName("dore");
-                                player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                             } else {
                                 player.sendMessage("§cCette couleur est réservé au joueur ayant un niveau de §bRPG §cde §6" + 750);
                                 return;
                             }
                         } else if(current.getDurability() == 15){
                             accounts.getDataStatistique().setColorName("blanc");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         } else {
                             accounts.getDataStatistique().setColorName("blanc");
-                            player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
                         }
                         player.sendMessage("§aVotre coleur a été modifié");
+                        player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + accounts.getDataStatistique().getNickname());
                         player.closeInventory();
                     });
 
