@@ -22,6 +22,8 @@ public class DataStatistique extends AbstractData{
     private int attaqueSpeed;
     private PlayerType playerType;
 
+    private String nickname;
+
     public String getColorName() {
         return colorName;
     }
@@ -125,5 +127,13 @@ public class DataStatistique extends AbstractData{
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

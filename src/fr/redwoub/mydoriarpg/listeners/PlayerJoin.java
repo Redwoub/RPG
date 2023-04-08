@@ -28,14 +28,18 @@ public class PlayerJoin implements Listener {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(main.getPseudoWithUUID());
         accounts.onLogin();
         friendsManager.sendJoinNotification();
-        player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + player.getName());
+        player.setDisplayName(PlayerUtils.getByString(accounts.getDataStatistique().getColorName()) + accounts.getDataStatistique().getNickname());
         player.setWalkSpeed(PlayerUtils.generateSpeed(accounts));
 
         if(!main.getPseudoLinkedUUID().isEmpty())
             main.getPseudoLinkedUUID().clear();
 
+        if(!main.getUuidLinkedToNickname().isEmpty())
+            main.getUuidLinkedToNickname().clear();
+
         config.set(player.getUniqueId().toString(), player.getName().toLowerCase());
         FileUtils.fillMapWithAllLineOfFile(main.getPseudoWithUUID(), main.getPseudoLinkedUUID());
+        FileUtils.fillMapWithAllLineOfFile(main.getNicknameWithUUID(), main.getUuidLinkedToNickname());
         FileUtils.save(config, main.getPseudoWithUUID());
 
         main.getScoreboardManager().onLogin(player);

@@ -46,7 +46,7 @@ public class Accounts extends AbstractData {
     }
 
     private String[] getDataFromYML(){
-        String[] info = new String[21];
+        String[] info = new String[22];
         info[0] = String.valueOf(dataAccount.getInt("vie_max"));
         info[1] = String.valueOf(dataAccount.getInt("speed"));
         info[2] = String.valueOf(dataAccount.getInt("defense"));
@@ -68,6 +68,7 @@ public class Accounts extends AbstractData {
         info[18] = dataAccount.getString("color_chat");
         info[19] = dataAccount.getString("grade");
         info[20] = dataAccount.getString("player_type");
+        info[21] = dataAccount.getString("nickname");
         if(dataAccount.getLong("col") == 0) newPlayer = true;
 
         return info;
@@ -95,6 +96,7 @@ public class Accounts extends AbstractData {
         dataAccount.set("color_chat", dataStatistique.getColorChat());
         dataAccount.set("grade", dataRank.getRank().getName());
         dataAccount.set("player_type", dataStatistique.getPlayerType().getName());
+        dataAccount.set("nickname", dataStatistique.getNickname());
 
         try {
             if(!friends.exists())
@@ -106,7 +108,7 @@ public class Accounts extends AbstractData {
             e.printStackTrace();
         }
     }
-    
+
     public void onLogin(){
         Main.getInstance().getAccounts().add(this);
         String[] data = getDataFromYML();
@@ -138,6 +140,7 @@ public class Accounts extends AbstractData {
             dataStatistique.setCurrentMana(dataStatistique.getMaxMana());
             dataStatistique.setHealth(dataStatistique.getMaxHealth());
             dataStatistique.setPlayerType(PlayerType.generateType(uuid));
+            dataStatistique.setNickname(Bukkit.getPlayer(uuid).getName());
             saveDataToYML();
 
         } else {
@@ -165,6 +168,7 @@ public class Accounts extends AbstractData {
             dataStatistique.setCurrentMana(dataStatistique.getMaxMana());
             dataStatistique.setHealth(dataStatistique.getMaxHealth());
             dataStatistique.setPlayerType(PlayerType.getByName(data[20]));
+            dataStatistique.setNickname(data[21]);
         }
 
         DataBonusStatistique statsWithoutBonus = getDataBonusStatistique();

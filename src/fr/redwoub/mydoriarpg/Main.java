@@ -25,8 +25,10 @@ public class Main extends JavaPlugin {
     private List<Accounts> accounts;
     private Map<Player, Player> friendsRequest;
     private Map<String, String> pseudoLinkedUUID;
+    private Map<String, String> uuidLinkedToNickname;
     private File deletedAccounts;
     private File pseudoWithUUID;
+    private File nicknameWithUUID;
     private ScoreboardManager scoreboardManager;
     private ScheduledExecutorService executorMonoThread;
     private ScheduledExecutorService scheduledExecutorService;
@@ -50,6 +52,8 @@ public class Main extends JavaPlugin {
         getCommand("friends").setExecutor(new Friends());
         getCommand("test").setExecutor(new Test());
         getCommand("levelup").setExecutor(new LevelUP());
+        getCommand("nick").setExecutor(new Nick());
+        getCommand("realname").setExecutor(new RealName());
     }
 
     @Override
@@ -59,9 +63,11 @@ public class Main extends JavaPlugin {
         register();
         deletedAccounts = new File(getDataFolder(), "/delete_accounts/");
         pseudoWithUUID = new File(getDataFolder(), "PseudoLinkToUUID.yml");
+        nicknameWithUUID = new File(getDataFolder(), "NicknameLinkToUUID.yml");
         accounts = new ArrayList<>();
         friendsRequest = new WeakHashMap<>();
         pseudoLinkedUUID = new HashMap<>();
+        uuidLinkedToNickname = new HashMap<>();
 
         scheduledExecutorService = Executors.newScheduledThreadPool(16);
         executorMonoThread = Executors.newScheduledThreadPool(1);
@@ -73,6 +79,7 @@ public class Main extends JavaPlugin {
             deletedAccounts.mkdir();
 
         FileUtils.createFile(pseudoWithUUID);
+        FileUtils.createFile(nicknameWithUUID);
 
         statistiqueManager = new StatistiqueManager().runTaskTimer(this, 20L, 60L);
     }
@@ -120,11 +127,19 @@ public class Main extends JavaPlugin {
         return pseudoLinkedUUID;
     }
 
+    public Map<String, String> getUuidLinkedToNickname() {
+        return uuidLinkedToNickname;
+    }
+
     public File getDeletedAccounts() {
         return deletedAccounts;
     }
 
     public File getPseudoWithUUID() {
         return pseudoWithUUID;
+    }
+
+    public File getNicknameWithUUID() {
+        return nicknameWithUUID;
     }
 }
