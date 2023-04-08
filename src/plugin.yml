@@ -1,5 +1,5 @@
 name: MydoriaRPG
-version: 0.1.2
+version: 0.1.3
 author: Redwoub
 website: https://github.com/Redwoub
 main: fr.redwoub.mydoriarpg.Main
@@ -26,3 +26,5 @@ commands:
       - ami
   test:
     permission: mydoria.admin
+  levelup:
+    permission-message: mydoria.admin
