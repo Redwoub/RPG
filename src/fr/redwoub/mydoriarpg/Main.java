@@ -25,7 +25,7 @@ public class Main extends JavaPlugin {
     private List<Accounts> accounts;
     private Map<Player, Player> friendsRequest;
     private Map<String, String> pseudoLinkedUUID;
-    private File saveDeleteAccount;
+    private File deletedAccounts;
     private File pseudoWithUUID;
     private ScoreboardManager scoreboardManager;
     private ScheduledExecutorService executorMonoThread;
@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         instance = this;
         register();
-        saveDeleteAccount = new File(getDataFolder(), "/delete_accounts/");
+        deletedAccounts = new File(getDataFolder(), "/delete_accounts/");
         pseudoWithUUID = new File(getDataFolder(), "PseudoLinkToUUID.yml");
         accounts = new ArrayList<>();
         friendsRequest = new WeakHashMap<>();
@@ -69,8 +69,8 @@ public class Main extends JavaPlugin {
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
 
-        if(!saveDeleteAccount.exists())
-            saveDeleteAccount.mkdir();
+        if(!deletedAccounts.exists())
+            deletedAccounts.mkdir();
 
         FileUtils.createFile(pseudoWithUUID);
 
@@ -120,8 +120,8 @@ public class Main extends JavaPlugin {
         return pseudoLinkedUUID;
     }
 
-    public File getSaveDeleteAccount() {
-        return saveDeleteAccount;
+    public File getDeletedAccounts() {
+        return deletedAccounts;
     }
 
     public File getPseudoWithUUID() {
