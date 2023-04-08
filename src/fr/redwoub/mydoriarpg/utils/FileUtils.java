@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FileUtils {
@@ -46,47 +47,29 @@ public class FileUtils {
         }
     }
 
-    /*
-    public static void removeLine(String lineToRemove, File file) throws IOException{
-        //Reading File Content and storing it to a StringBuilder variable ( skips lineToRemove)
-        StringBuilder sb = new StringBuilder();
-        try (Scanner sc = new Scanner(file)) {
-            String currentLine;
-            while(sc.hasNext()){
-                currentLine = sc.nextLine();
-                if(currentLine.equalsIgnoreCase(lineToRemove)){
-                    continue; //skips lineToRemove
-                }
-                sb.append(currentLine).append("\n");
-            }
+    public static void fillMapWithAllLineOfFile(File file, Map<String, String> map){
+
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        //Delete File Content
-        PrintWriter pw = new PrintWriter(file);
-        pw.close();
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-        writer.append(sb.toString());
-        writer.close();
-    }
-
-     */
-
-    public static void removeLine(File file, String lineToRemove) throws IOException {
-        File tempFile = new File(file.getParentFile(), "myTempFile.txt");
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
+        String[] strings;
         String currentLine;
-
-        while((currentLine = reader.readLine()) != null) {
-            // trim newline when comparing with lineToRemove
-            String trimmedLine = currentLine.trim();
-            if(trimmedLine.equals(lineToRemove)) continue;
-            writer.write(currentLine + System.getProperty("line.separator"));
+        while(true){
+            try {
+                if ((currentLine = reader.readLine()) == null) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            strings = currentLine.split(":");
+            map.put(strings[1].substring(1), strings[0]);
         }
-        writer.close();
-        reader.close();
-        boolean successful = tempFile.renameTo(file);
+        try {
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
