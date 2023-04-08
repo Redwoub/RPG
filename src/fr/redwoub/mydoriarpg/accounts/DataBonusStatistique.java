@@ -2,33 +2,20 @@ package fr.redwoub.mydoriarpg.accounts;
 
 import java.util.UUID;
 
-public class DataStatistique extends AbstractData{
+public class DataBonusStatistique extends AbstractData{
 
-    public DataStatistique(UUID uuid) {
+    public DataBonusStatistique(UUID uuid){
         this.uuid = uuid;
     }
 
-    private String colorName;
-    private String colorChat;
     private int maxHealth;
-    private int health;
     private int speed;
     private int defense;
     private int force;
     private int degatCritique;
     private int tauxCritique;
     private int maxMana;
-    private int currentMana;
     private int attaqueSpeed;
-    private PlayerType playerType;
-
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -36,14 +23,6 @@ public class DataStatistique extends AbstractData{
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getSpeed() {
@@ -94,36 +73,11 @@ public class DataStatistique extends AbstractData{
         this.maxMana = maxMana;
     }
 
-
     public int getAttaqueSpeed() {
         return attaqueSpeed;
     }
 
     public void setAttaqueSpeed(int attaqueSpeed) {
         this.attaqueSpeed = attaqueSpeed;
-    }
-
-    public String getColorChat() {
-        return colorChat;
-    }
-
-    public void setColorChat(String colorChat) {
-        this.colorChat = colorChat;
-    }
-
-    public int getCurrentMana() {
-        return currentMana;
-    }
-
-    public void setCurrentMana(int currentMana) {
-        this.currentMana = currentMana;
-    }
-
-    public PlayerType getPlayerType() {
-        return playerType;
-    }
-
-    public void setPlayerType(PlayerType playerType) {
-        this.playerType = playerType;
     }
 }

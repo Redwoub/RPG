@@ -41,8 +41,8 @@ public class PersonalScoreboard {
             rank = a.getDataRank().getRank();
             currentMana = a.getDataStatistique().getCurrentMana();
             maxMana = a.getDataStatistique().getMaxMana();
-            currentHealth = a.getDataStatistique().getVie();
-            maxHealth = a.getDataStatistique().getMaxVie();
+            currentHealth = a.getDataStatistique().getHealth();
+            maxHealth = a.getDataStatistique().getMaxHealth();
         });
     }
 

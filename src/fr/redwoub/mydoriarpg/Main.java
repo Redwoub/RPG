@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
     private ScoreboardManager scoreboardManager;
     private ScheduledExecutorService executorMonoThread;
     private ScheduledExecutorService scheduledExecutorService;
-    public HashMap<Player, StatistiqueManager> statsBonusForEachPlayer;
+    private StatistiqueManager statistiqueManager;
 
 
 
@@ -59,12 +59,13 @@ public class Main extends JavaPlugin {
         scheduledExecutorService = Executors.newScheduledThreadPool(16);
         executorMonoThread = Executors.newScheduledThreadPool(1);
         scoreboardManager = new ScoreboardManager();
-        statsBonusForEachPlayer = new HashMap<>();
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
 
         if(!saveDeleteAccount.exists())
             saveDeleteAccount.mkdir();
+
+        statistiqueManager = (StatistiqueManager) new StatistiqueManager().runTaskTimer(this, 20L, 60L);
     }
 
     @Override
@@ -75,6 +76,8 @@ public class Main extends JavaPlugin {
                 player.kickPlayer("§cUne erreur est survenue. \n\n§cPour evité tout bug avec votre compte, nous avons préféré vous expulsé du serveur.\n\n§cDésolé pour la gêne occasionné");
             }
         }
+
+        statistiqueManager.cancel();
     }
 
     public static Main getInstance() {

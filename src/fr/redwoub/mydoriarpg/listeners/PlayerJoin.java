@@ -25,20 +25,5 @@ public class PlayerJoin implements Listener {
         Main.getInstance().getScoreboardManager().onLogin(player);
         event.setJoinMessage("§8[§a+§8] " + player.getDisplayName());
 
-        if(accounts.isNewPlayer()){
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"))
-                    + "§cVous allez êtres déconnecté dans 3 secondes pour finir les paramétrages de votre compte.");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            player.kickPlayer("§cLes réglages de votre compte sont terminé.\n§aVous pouvez vous reconnecter");
-
-        } else {
-            StatistiqueManager statistiqueManager = new StatistiqueManager(player);
-            Main.getInstance().statsBonusForEachPlayer.put(player, statistiqueManager);
-            statistiqueManager.runTaskTimer(Main.getInstance(), 20L, 40L);
-        }
     }
 }
