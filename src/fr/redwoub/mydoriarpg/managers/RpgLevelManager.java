@@ -100,16 +100,17 @@ public class RpgLevelManager {
     }
 
     public void levelUp(){
-
+        String prefix = ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"));
+        if(accounts.getDataLvl().getRpgLvl() == RpgLevel.getMaxLevel()) return;
         accounts.getDataLvl().setRpgLvl(accounts.getDataLvl().getNexpRpgLvl());
         accounts.getDataLvl().setMissingRpgXp(RpgLevel.needingxp(accounts.getDataLvl().getRpgLvl()));
         if(accounts.getDataLvl().getRpgLvl() == RpgLevel.getMaxLevel()){
             Player player = Bukkit.getPlayer(accounts.getUUID());
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
             player.sendMessage("§7------------------------------------");
-            player.sendMessage("§aRPG Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getRpgLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getRpgLvl());
-            player.sendMessage("§aBravo ! Vous êtes niveau maximum !");
-            player.sendMessage("§6Une annonce va être faite pour te félicité !");
+            player.sendMessage(prefix + "§aRPG Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getRpgLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getRpgLvl());
+            player.sendMessage(prefix + "§aBravo ! Vous êtes niveau maximum !");
+            player.sendMessage(prefix + "§6Une annonce va être faite pour te félicité !");
             player.sendMessage("§7------------------------------------");
             new BukkitRunnable(){
 
@@ -134,7 +135,7 @@ public class RpgLevelManager {
             Player player = Bukkit.getPlayer(accounts.getUUID());
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
             player.sendMessage("§7------------------------------------");
-            player.sendMessage("§aRPG Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getRpgLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getRpgLvl());
+            player.sendMessage(prefix + "§aRPG Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getRpgLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getRpgLvl());
             player.sendMessage("§7------------------------------------");
         }
     }

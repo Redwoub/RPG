@@ -1,5 +1,6 @@
 package fr.redwoub.mydoriarpg.managers;
 
+import fr.redwoub.mydoriarpg.Main;
 import fr.redwoub.mydoriarpg.accounts.Accounts;
 import fr.redwoub.mydoriarpg.accounts.CombatLevel;
 import fr.redwoub.mydoriarpg.accounts.RpgLevel;
@@ -99,12 +100,14 @@ public class CombatLevelManager {
     }
 
     public void levelUp(){
+        String prefix = ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"));
+        if(accounts.getDataLvl().getCombatLvl() == CombatLevel.getMaxLevel()) return;
         accounts.getDataLvl().setCombatLvl(accounts.getDataLvl().getNextCombatLvl());
         accounts.getDataLvl().setMissingCombatXp(RpgLevel.needingxp(accounts.getDataLvl().getCombatLvl()));
         Player player = Bukkit.getPlayer(accounts.getUUID());
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
         player.sendMessage("§7------------------------------------");
-        player.sendMessage("§aCombat Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getCombatLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getCombatLvl());
+        player.sendMessage(prefix + "§aCombat Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getCombatLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getCombatLvl());
         player.sendMessage("§7------------------------------------");
 
     }

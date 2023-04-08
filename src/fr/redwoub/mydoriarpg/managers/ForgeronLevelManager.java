@@ -1,5 +1,6 @@
 package fr.redwoub.mydoriarpg.managers;
 
+import fr.redwoub.mydoriarpg.Main;
 import fr.redwoub.mydoriarpg.accounts.Accounts;
 import fr.redwoub.mydoriarpg.accounts.ForgeronLevel;
 import fr.redwoub.mydoriarpg.utils.ItemBuilder;
@@ -98,12 +99,14 @@ public class ForgeronLevelManager {
     }
 
     public void levelUp(){
+        String prefix = ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"));
+        if(accounts.getDataLvl().getForgeronLvl() == ForgeronLevel.getMaxLevel()) return;
         accounts.getDataLvl().setForgeronLvl(accounts.getDataLvl().getNextForgeronLvl());
         accounts.getDataLvl().setMissingForgeronXp(ForgeronLevel.needingxp(accounts.getDataLvl().getForgeronLvl()));
         Player player = Bukkit.getPlayer(accounts.getUUID());
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
         player.sendMessage("§7------------------------------------");
-        player.sendMessage("§aForgeron Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getForgeronLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getForgeronLvl());
+        player.sendMessage(prefix + "§aForgeron Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getForgeronLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getForgeronLvl());
         player.sendMessage("§7------------------------------------");
 
     }

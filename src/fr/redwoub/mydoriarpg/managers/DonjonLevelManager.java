@@ -1,5 +1,6 @@
 package fr.redwoub.mydoriarpg.managers;
 
+import fr.redwoub.mydoriarpg.Main;
 import fr.redwoub.mydoriarpg.accounts.Accounts;
 import fr.redwoub.mydoriarpg.accounts.DonjonLevel;
 import fr.redwoub.mydoriarpg.utils.ItemBuilder;
@@ -98,12 +99,14 @@ public class DonjonLevelManager {
     }
 
     public void levelUp(){
+        String prefix = ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix"));
+        if(accounts.getDataLvl().getDonjonLvl() == DonjonLevel.getMaxLevel()) return;
         accounts.getDataLvl().setDonjonLvl(accounts.getDataLvl().getNextDonjonLvl());
         accounts.getDataLvl().setMissingDonjonXp(DonjonLevel.needingxp(accounts.getDataLvl().getDonjonLvl()));
         Player player = Bukkit.getPlayer(accounts.getUUID());
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
         player.sendMessage("§7------------------------------------");
-        player.sendMessage("§aDonjon Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getDonjonLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getDonjonLvl());
+        player.sendMessage(prefix + "§aDonjon Level UP §8: " + ChatColor.DARK_AQUA + (accounts.getDataLvl().getDonjonLvl() - 1) + " §7 -> " + ChatColor.DARK_AQUA + accounts.getDataLvl().getDonjonLvl());
         player.sendMessage("§7------------------------------------");
 
     }
