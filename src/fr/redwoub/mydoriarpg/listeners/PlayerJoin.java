@@ -29,7 +29,17 @@ public class PlayerJoin implements Listener {
         player.setWalkSpeed(PlayerUtils.generateSpeed(accounts));
         Main.getInstance().getScoreboardManager().onLogin(player);
 
-        config.set(player.getUniqueId().toString(), player.getName());
+        if(config.get(player.getName()) != null){
+            try {
+                FileUtils.removeLine(Main.getInstance().getPseudoWithUUID(), player.getName().toLowerCase());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            config.set(player.getName().toLowerCase(), player.getUniqueId().toString());
+        } else {
+            config.set(player.getName().toLowerCase(), player.getUniqueId().toString());
+        }
+
         FileUtils.save(config, Main.getInstance().getPseudoWithUUID());
 
         event.setJoinMessage("§8[§a+§8] " + player.getDisplayName());
