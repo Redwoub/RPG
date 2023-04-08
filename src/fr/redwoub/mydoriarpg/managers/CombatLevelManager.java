@@ -37,6 +37,28 @@ public class CombatLevelManager {
         return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 15).setName("§cNiveau " + lvl).setLore("§c§lBloqué").toItemStack();
     }
 
+    public ItemStack createGlass(int lvl, String lore){
+        DecimalFormat df = new DecimalFormat("###.#");
+        if(levelIsExceed(lvl)){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE,1, (byte) 5).setName("§aNiveau " + lvl).setLore(Arrays.asList("§a§lDébloqueé", lore)).toItemStack();
+        } else if((accounts.getDataLvl().getCombatLvl() + 1) == lvl){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 4).setName("§eNiveau " + lvl).setLore(Arrays.asList("§7Progression : §e" + df.format(progression()) + "%", generateProgressionBar(progression(), lvl, accounts.getDataLvl().getMissingCombatXp()), lore)).toItemStack();
+        }
+
+        return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 15).setName("§cNiveau " + lvl).setLore(Arrays.asList("§c§lBloqué", lore)).toItemStack();
+    }
+
+    public ItemStack createGlass(int lvl, String lore, String lore2){
+        DecimalFormat df = new DecimalFormat("###.#");
+        if(levelIsExceed(lvl)){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE,1, (byte) 5).setName("§aNiveau " + lvl).setLore(Arrays.asList("§a§lDébloqueé", lore, lore2)).toItemStack();
+        } else if((accounts.getDataLvl().getCombatLvl() + 1) == lvl){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 4).setName("§eNiveau " + lvl).setLore(Arrays.asList("§7Progression : §e" + df.format(progression()) + "%", generateProgressionBar(progression(), lvl, accounts.getDataLvl().getMissingCombatXp()), lore, lore2)).toItemStack();
+        }
+
+        return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 15).setName("§cNiveau " + lvl).setLore(Arrays.asList("§c§lBloqué", lore, lore2)).toItemStack();
+    }
+
     public ItemStack createGlass(int lvl, String lore, String lore2, String lore3){
         DecimalFormat df = new DecimalFormat("###.#");
         if(levelIsExceed(lvl)){
@@ -46,6 +68,17 @@ public class CombatLevelManager {
         }
 
         return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 15).setName("§cNiveau " + lvl).setLore(Arrays.asList("§c§lBloqué", lore, lore2, lore3)).toItemStack();
+    }
+
+    public ItemStack createGlass(int lvl, String lore, String lore2, String lore3, String lore4){
+        DecimalFormat df = new DecimalFormat("###.#");
+        if(levelIsExceed(lvl)){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE,1, (byte) 5).setName("§aNiveau " + lvl).setLore(Arrays.asList("§a§lDébloqueé", lore, lore2, lore3, lore4)).toItemStack();
+        } else if((accounts.getDataLvl().getCombatLvl() + 1) == lvl){
+            return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 4).setName("§eNiveau " + lvl).setLore(Arrays.asList("§7Progression : §e" + df.format(progression()) + "%", generateProgressionBar(progression(), lvl, accounts.getDataLvl().getMissingCombatXp()), lore, lore2, lore3, lore4)).toItemStack();
+        }
+
+        return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 15).setName("§cNiveau " + lvl).setLore(Arrays.asList("§c§lBloqué", lore, lore2, lore3, lore4)).toItemStack();
     }
 
     public double progression(){
