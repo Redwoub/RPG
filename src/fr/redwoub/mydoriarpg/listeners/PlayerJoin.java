@@ -41,5 +41,4 @@ public class PlayerJoin implements Listener {
             statistiqueManager.runTaskTimer(Main.getInstance(), 20L, 40L);
         }
     }
-
 }

@@ -13,7 +13,7 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void playerChat(AsyncPlayerChatEvent event){
         Main.getInstance().getAccount(event.getPlayer()).ifPresent(accounts -> {
-            event.setFormat("§8§l[" + accounts.getDataRank().getRank().getPrefix() + "§8§l]§r %1$s §7>" + PlayerUtils.getByString(accounts.getDataStatistique().getColorChat()) + " %2$s");
+            event.setFormat("§8§l[" + accounts.getDataRank().getRank().getPrefix() + "§8§l] §8§l[§aGUILDE§8§l]§r %1$s §7>" + PlayerUtils.getByString(accounts.getDataStatistique().getColorChat()) + " %2$s");
         });
     }
 
