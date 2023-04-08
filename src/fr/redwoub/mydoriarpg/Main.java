@@ -12,6 +12,7 @@ import fr.redwoub.mydoriarpg.scoreboard.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.util.*;
@@ -26,7 +27,7 @@ public class Main extends JavaPlugin {
     private ScoreboardManager scoreboardManager;
     private ScheduledExecutorService executorMonoThread;
     private ScheduledExecutorService scheduledExecutorService;
-    private StatistiqueManager statistiqueManager;
+    private BukkitTask statistiqueManager;
 
 
 
@@ -65,7 +66,7 @@ public class Main extends JavaPlugin {
         if(!saveDeleteAccount.exists())
             saveDeleteAccount.mkdir();
 
-        statistiqueManager = (StatistiqueManager) new StatistiqueManager().runTaskTimer(this, 20L, 60L);
+        statistiqueManager = new StatistiqueManager().runTaskTimer(this, 20L, 60L);
     }
 
     @Override
