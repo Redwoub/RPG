@@ -54,6 +54,7 @@ public class Main extends JavaPlugin {
         getCommand("levelup").setExecutor(new LevelUP());
         getCommand("nick").setExecutor(new Nick());
         getCommand("realname").setExecutor(new RealName());
+        //getCommand("restaure").setExecutor(new Restaure());
     }
 
     @Override

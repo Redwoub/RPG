@@ -5,31 +5,43 @@ website: https://github.com/Redwoub
 main: fr.redwoub.mydoriarpg.Main
 commands:
   menu:
+    description: Ouvre le menu principal du serveur
   statistique:
+    description: Ouvre le menu affichant vos statistiques
     aliases:
       - stats
       - stat
   skill:
+    description: Ouvre le menu de vos skills
     aliases:
       - metier
       - skills
   colorchat:
+    description: Permet de changer la couleur de votre écriture dans le chat
   colorname:
+    description: Permet de changer la couleur e votre pseudo
   nick:
+    description: Permet de changer de pseudo
     aliases:
       - nickname
   realname:
-    permission: mydoria.realname
+    description: Permet de voir le vrai pseudo d'un joueur ayant utilisé la commande /nick
+    permission: mydoria.admin.realname
   setrank:
-    permission: mydoria.setrank
-    permission-message: §cVous n'avez pas la permission !
+    description: Permet de set un grade à un joueur
+    permission: mydoria.admin.setrank
+    permission-message: §cVous n'avez pas la permission d'executer cette commande !
   friends:
+    description: Ouvre le menu d'ami
     aliases:
       - friend
       - f
       - amis
       - ami
   test:
-    permission: mydoria.admin
+    description: Commande temporaire qui donne une épée de test
+    permission: mydoria.admin.test
   levelup:
-    permission-message: mydoria.admin
+    description: Commande pour augmenter manuellement le rpglevel d'un joueur
+    permission: mydoria.admin.levelup
+    permission-message: §cVous n'avez pas la permission d'executer cette commande !

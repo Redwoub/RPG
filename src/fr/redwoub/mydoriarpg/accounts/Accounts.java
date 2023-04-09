@@ -216,6 +216,10 @@ public class Accounts extends AbstractData {
         return optionFriends;
     }
 
+    public File getSaveDir() {
+        return saveDir;
+    }
+
     public File getFriends() {
         return friends;
     }
