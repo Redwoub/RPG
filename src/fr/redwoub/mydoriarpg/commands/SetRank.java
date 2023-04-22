@@ -16,10 +16,10 @@ import java.io.File;
 import java.util.UUID;
 
 public class SetRank implements CommandExecutor {
-
+    private final String prefix = ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.sytem-prefix"));
     private void sendHelp(CommandSender sender){
-        sender.sendMessage("§cErreur §8: §e/setrank <joueur> <grade>");
-        sender.sendMessage("§7Voici la liste des grades : Joueur, Vip, Mvp, Support, Builder, Modérateur, Développeur et Administrateur");
+        sender.sendMessage(prefix + "§cErreur §8: §e/setrank <joueur> <grade>");
+        sender.sendMessage(prefix + "§7Voici la liste des grades : Joueur, Vip, Mvp, Support, Builder, Modérateur, Développeur et Administrateur");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SetRank implements CommandExecutor {
             Player player = Bukkit.getPlayer(args[0]);
             Main.getInstance().getAccount(player).ifPresent(accounts -> {
                 accounts.getDataRank().setRank(RankUnit.getByName(args[1]));
-                sender.sendMessage("§aLe grade de " + player.getDisplayName() + " §aa bien été modifié !");
+                sender.sendMessage(prefix + "§aLe grade de " + player.getDisplayName() + " §aa bien été modifié !");
             });
         } else {
             if(Main.getInstance().getPseudoLinkedUUID().get(args[0].toLowerCase()) != null){
@@ -43,9 +43,9 @@ public class SetRank implements CommandExecutor {
                 YamlConfiguration cAccount = YamlConfiguration.loadConfiguration(account);
                 cAccount.set("grade", RankUnit.getByName(args[1]).getName());
                 FileUtils.save(cAccount, account);
-                sender.sendMessage("§aLe grade de " + args[0] + " §aa bien été modifié !");
+                sender.sendMessage(prefix + "§aLe grade de " + args[0] + " §aa bien été modifié !");
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages.system-prefix")) + "§cCe joueur n'existe pas !");
+                sender.sendMessage(prefix + "§cCe joueur n'existe pas !");
             }
         }
         return false;
